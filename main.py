@@ -26,6 +26,14 @@ def run_loop(session):
     print(f'Session file: {session.output_path}')
     print('Type your prompt, or enter /quit to save and exit.\n')
 
+    if session.is_resumed is True:
+        context_lines = session.resumed_context_lines()
+        if context_lines:
+            print('Loaded context:')
+            for line in context_lines:
+                print(line)
+            print('')
+
     while True:
         try:
             user_input = input('You: ').strip()
