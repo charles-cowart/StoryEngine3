@@ -20,6 +20,12 @@ class Session:
             'You are a creative writing assistant. Help the user write an interactive story. '
             'Maintain continuity, tone, characters, and plot details from prior context. '
             'Be imaginative but coherent, and when appropriate propose concise next-scene options.'
+            "Stay consistent with the supplied world, characters, and plot facts."
+            "Do not contradict established facts unless the user explicitly revises them."
+            "Preserve character voice and relationship dynamics."
+            "Prefer natural scene continuation over exposition dumps."
+            "When uncertain, follow the most specific fact in the story bible."
+            # Story Bibles would be added here.
         )
 
         # for now, give it the model name
