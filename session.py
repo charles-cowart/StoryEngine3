@@ -10,7 +10,7 @@ from ollama import Client
 
 
 class Session:
-    WINDOW_SIZE = 10
+    WINDOW_SIZE = 30
 
     def __init__(self, model='gpt-oss:20b', output_path=None, resume_path=None, client=None):
         self.client = client or Client()
@@ -22,13 +22,18 @@ class Session:
             'Be imaginative but coherent, and when appropriate propose concise next-scene options.'
         )
 
+        # for now, give it the model name
+        self.assistant_name = model
+
         if resume_path:
             self._load_from_file(resume_path)
             if output_path:
                 self.output_path = output_path
             else:
                 self.output_path = resume_path
+            self.is_resumed = True
         else:
+            self.is_resumed = False
             self.session_id = str(uuid.uuid4())
             now = self._now_iso()
             self.created_at = now
@@ -145,7 +150,7 @@ class Session:
         stream = self.client.chat(model=self.model, messages=model_messages, stream=True)
 
         chunks = []
-        print('\nAssistant: ', end='', flush=True)
+        print(f'\n{self.assistant_name}: ', end='', flush=True)
 
         spinner_stop = threading.Event()
         spinner_started = threading.Event()
@@ -154,9 +159,9 @@ class Session:
         def _spinner():
             spinner_started.set()
             while not spinner_stop.is_set():
-                print(f'\rAssistant: Thinking... {next(spinner_frames)}', end='', flush=True)
+                print(f'\r{self.assistant_name}: Thinking... {next(spinner_frames)}', end='', flush=True)
                 sleep(0.1)
-            print('\rAssistant: ', end='', flush=True)
+            print(f'\r{self.assistant_name}: ', end='', flush=True)
 
         spinner_thread = threading.Thread(target=_spinner, daemon=True)
         spinner_thread.start()

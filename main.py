@@ -17,7 +17,11 @@ def parse_args():
 
 
 def run_loop(session):
-    print('Story session started.')
+    if session.is_resumed is True:
+        print('Story session resumed.')
+    else:
+        print('Story session started.')
+
     print(f'Model: {session.model}')
     print(f'Session file: {session.output_path}')
     print('Type your prompt, or enter /quit to save and exit.\n')
