@@ -1,6 +1,9 @@
 import os
+import threading
 import uuid
 from datetime import datetime, timezone
+from itertools import cycle
+from time import sleep
 
 import yaml
 from ollama import Client
@@ -143,11 +146,35 @@ class Session:
 
         chunks = []
         print('\nAssistant: ', end='', flush=True)
+
+        spinner_stop = threading.Event()
+        spinner_started = threading.Event()
+        spinner_frames = cycle('|/-\\')
+
+        def _spinner():
+            spinner_started.set()
+            while not spinner_stop.is_set():
+                print(f'\rAssistant: Thinking... {next(spinner_frames)}', end='', flush=True)
+                sleep(0.1)
+            print('\rAssistant: ', end='', flush=True)
+
+        spinner_thread = threading.Thread(target=_spinner, daemon=True)
+        spinner_thread.start()
+        spinner_started.wait(timeout=0.1)
+
+        spinner_active = True
         for chunk in stream:
             text = chunk.get('message', {}).get('content', '')
             if text:
+                if spinner_active:
+                    spinner_stop.set()
+                    spinner_thread.join(timeout=0.3)
+                    spinner_active = False
                 print(text, end='', flush=True)
                 chunks.append(text)
+        if spinner_active:
+            spinner_stop.set()
+            spinner_thread.join(timeout=0.3)
         print('')
         return ''.join(chunks).strip()
 
