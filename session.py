@@ -145,6 +145,20 @@ class Session:
 
         return payload
 
+    def resumed_context_lines(self):
+        lines = []
+
+        if self.rolling_summary and self.summarized_through_message > 0:
+            lines.append(
+                'SUMMARY'
+                f'[1-{self.summarized_through_message}]: {self.rolling_summary}'
+            )
+
+        for msg in self._unsummarized_messages():
+            lines.append(f"{msg['role'].upper()}[{msg['index']}]: {msg['content']}")
+
+        return lines
+
     def generate_assistant_response(self):
         model_messages = self.build_model_messages()
         stream = self.client.chat(model=self.model, messages=model_messages, stream=True)
