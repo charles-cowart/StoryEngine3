@@ -31,9 +31,11 @@ def run_loop(session):
             return
 
         if not user_input:
-            continue
+            # For story writing, if the user presses return, consider that a command
+            # to continue writing on the same course.
+            user_input = 'continue'
 
-        if user_input.lower() in ['/quit', '/exit', 'quit', 'exit']:
+        if user_input.lower() in ['/quit', '/exit']:
             print('Saving session...')
             session.close()
             print(f'Session saved to {session.output_path}')
