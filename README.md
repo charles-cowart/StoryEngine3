@@ -41,16 +41,17 @@ Set output path for a new or resumed session:
 python main.py --output sessions/my_session.yaml
 ```
 
-Quit with `/quit`, `/exit`, `quit`, or `exit`. The session is automatically saved on quit or Ctrl+C.
+Quit with `/quit`, `/q`. The session is automatically saved on quit or Ctrl+C.
 
 ## Design notes
 
 - `Session` stores every user/assistant message in an append-only `messages` list.
 - Summaries are stored in `summaries` and never replace raw messages.
-- Rolling summarization window size is 10 messages:
-  - While unsummarized messages are `<= 10`, they are sent raw.
-  - When unsummarized messages become `> 10`, the oldest 10 are folded into a new rolling summary.
+- Rolling summarization window size is 20 messages:
+  - While unsummarized messages are `<= 20`, they are sent raw.
+  - When unsummarized messages become `> 20`, the oldest 20 are folded into a new rolling summary.
   - Future model calls send system prompt + rolling summary + remaining unsummarized messages.
+  - The value can be changed at compile-time.
 - YAML persistence includes metadata and enough state to reconstruct context boundaries.
 
 ## Example YAML shape
