@@ -1,148 +1,78 @@
-# Character Dossiers for RAG Retrieval
+# Wonderland World Rules and Logic Model
 
 **Document metadata (suggested)**
 - work: Alice's Adventures in Wonderland
-- doc_type: character
+- doc_type: world_rules
 - chapter_scope: all
 
-## Alice
+## 1) Unstable rules of Wonderland
 
-### Role
-Primary focal consciousness; observer-participant in a destabilized world.
+Wonderland does not follow normal, consistent rules about:
+- size and power,
+- language and meaning,
+- rank and competence,
+- process and justice.
 
-### Dominant traits
-- Curious, verbally agile, intermittently polite and assertive.
-- Struggles with self-definition under changing conditions.
-- Gradual transition from reactive to critical.
+### RAG use
+When users ask “Why does X contradict Y?”, retrieve this section to frame contradiction as a design principle, not a continuity error.
 
-### Motivations
-- Understand rules of unfamiliar spaces.
-- Preserve personal coherence and dignity.
-- Reach the garden / move toward meaningful orientation.
+## 2) Size-change mechanics
 
-### Key evidence scenes
-- Questions identity in early transformations.
-- Negotiates growth control via mushroom strategy.
-- Challenges court absurdity in final chapters.
+### Observed mechanisms
+- Ingestion triggers transformation (bottle, cake, mushroom).
+- Early transformations are uncontrolled; mid-story introduces tactical control.
 
-### Retrieval cues
-- identity, growth, agency, childhood reasoning, moral development
+### Narrative consequences
+- Physical scale changes social treatment.
+- Identity narratives are repeatedly reset by bodily discontinuity.
 
-## White Rabbit
+## 3) Language as a form of control
 
-### Role
-Catalyst and recurring anxiety figure.
+In many scenes, authority is shown through:
+- pedantic correction,
+- literal interpretation of phrases,
+- riddles without clear answers,
+- punitive response to unclear meaning.
 
-### Dominant traits
-- Flustered, status-conscious, schedule-obsessed.
-- Serves higher authority (Queen) and projects panic downward.
+### Retrieval-ready interpretation
+In Wonderland, the way language is used often determines who has power.
 
-### Narrative function
-- Initiates descent into Wonderland.
-- Embodies bureaucratic urgency and class hierarchy.
+## 4) Time disorder
 
-### Retrieval cues
-- lateness, gloves, fan, servant confusion, bureaucracy
+Tea-party logic introduces a persistent present-time (“always tea-time”).
 
-## Cheshire Cat
+### Consequences
+- Ritual repeats without advancement.
+- Etiquette survives even when purpose collapses.
+- Conversation becomes a looping status game.
 
-### Role
-Philosophical destabilizer and orientation guide.
+## 5) Institutional parody
 
-### Dominant traits
-- Detached, ironic, paradoxical.
-- Appears/disappears partially; body fragmentation mirrors semantic instability.
+### Political parody
+- Queen’s decrees are impulsive and excessive.
+- Punishment language outruns legal procedure.
 
-### Narrative function
-- Reframes madness as systemic normality.
-- Offers directional help that is true but non-soothing.
+### Legal parody
+- Trial evidence is weak, disordered, and theatrically presented.
+- Verdict pressure precedes rational inquiry.
 
-### Retrieval cues
-- grin, madness, direction, ontology of presence
+### Educational parody
+- Mock Turtle’s schooling narrative mocks curriculum prestige.
 
-## Caterpillar
+## 6) How emotions affect the world
 
-### Role
-Interrogator of identity and threshold mentor.
+Emotion can change the environment in a material way (e.g., tears produce a navigable pool).
 
-### Dominant traits
-- Laconic, repetitive, severe.
-- Prefers questions over explanations.
+### RAG interpretation cue
+When users ask how “feelings shape plot,” connect emotional states to literal world construction.
 
-### Narrative function
-- Forces Alice into self-reflection.
-- Provides practical mechanism (mushroom sides) for controlled transformation.
+## 7) Dream-frame logic
 
-### Retrieval cues
-- Who are you, mushroom, controlled change, advice
+Wonderland can be read through dream conventions:
+- abrupt transitions,
+- fluid identity boundaries,
+- symbol-heavy objects,
+- compressed authority archetypes.
 
-## Duchess
-
-### Role
-Parodic authority in domestic sphere.
-
-### Dominant traits
-- Violent-affectionate oscillation.
-- Moralizing aphorisms detached from behavior.
-
-### Narrative function
-- Satirizes adult hypocrisy and unstable caregiving norms.
-
-### Retrieval cues
-- pepper, baby/pig, moral lessons, chaos household
-
-## Queen of Hearts
-
-### Role
-Embodiment of arbitrary sovereign force.
-
-### Dominant traits
-- Impulsive, punitive, theatrical.
-- Repeats capital punishment threats as default response.
-
-### Narrative function
-- Concentrates themes of law, fear, and procedural absurdity.
-
-### Retrieval cues
-- Off with their heads, croquet, trial, authoritarian parody
-
-## Mad Hatter + March Hare + Dormouse (Tea-party cluster)
-
-### Group role
-Collective engine of conversational nonsense and exclusionary etiquette.
-
-### Group traits
-- Hostile wit, circular argumentation, performative rudeness.
-- High tolerance for contradiction, low tolerance for outsider logic.
-
-### Narrative function
-- Demonstrates social systems where meaning is less important than participation style.
-
-### Retrieval cues
-- tea-time, riddle, Time personified, seat switching, interruption
-
-## Gryphon and Mock Turtle
-
-### Role
-Guides into memory-performance and educational satire.
-
-### Dominant traits
-- Gryphon: brisk, directive, impatient.
-- Mock Turtle: melancholic, theatrical, pun-centric.
-
-### Narrative function
-- Expose absurd construction of formal learning and prestige narratives.
-
-### Retrieval cues
-- school parody, quadrille, songs, nostalgia
-
-## Knave of Hearts
-
-### Role
-Trial defendant and legal placeholder.
-
-### Narrative function
-- Focus of courtroom spectacle rather than meaningful guilt inquiry.
-
-### Retrieval cues
-- tarts, accusation, procedural unfairness
+### RAG caveat
+A strong answer should avoid reducing all meaning to “it was only a dream”; instead, treat dream structure as one useful lens.
