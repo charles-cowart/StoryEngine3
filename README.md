@@ -2,7 +2,8 @@
 
 Interactive story-writing CLI using local Ollama models, llamaIndex retrieval over local story files, append-only transcript logging, and YAML session persistence.
 
-This project is for educational and experimental purposes.
+This project is for educational and experimental purposes. Specifically, it is an educational and experimental exploration of building
+RAG-based storytelling systems using public domain works.
 
 ## Install
 
