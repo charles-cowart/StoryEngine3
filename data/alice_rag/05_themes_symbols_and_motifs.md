@@ -8,7 +8,7 @@
 ## Theme A: Identity under transformation
 
 ### Claim
-Alice’s body volatility externalizes psychological uncertainty about growth, memory, and self-continuity.
+Alice’s frequent changes in size reflect her confusion about who she is and her difficulty remembering things as she grows up.
 
 ### Scene anchors
 - Early shrinking/growing episodes.
