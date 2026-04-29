@@ -37,7 +37,7 @@ Wonderland institutions maintain formal structure while detaching from fairness 
 ## Theme C: Language as unstable ground
 
 ### Claim
-Wordplay and semantic slippage reveal language as contest, not neutral medium.
+Wordplay and shifting meanings show that language in Wonderland is often a source of conflict rather than clear communication.
 
 ### Scene anchors
 - Puns in Mock Turtle schooling.
