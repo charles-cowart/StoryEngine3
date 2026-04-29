@@ -2,6 +2,8 @@
 
 Interactive story-writing CLI using local Ollama models, llamaIndex retrieval over local story files, append-only transcript logging, and YAML session persistence.
 
+This project is for educational and experimental purposes.
+
 ## Install
 
 ```bash
