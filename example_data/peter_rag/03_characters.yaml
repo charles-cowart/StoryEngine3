@@ -1,0 +1,31 @@
+characters:
+  peter_pan:
+    traits: [reckless, charming, proud, curious]
+    goals:
+      - keep adventures exciting
+      - protect Neverland from pirates
+  wendy_darling:
+    traits: [kind, practical, imaginative]
+    goals:
+      - keep everyone safe
+      - preserve stories and memories
+  captain_hook:
+    traits: [vain, theatrical, vengeful]
+    goals:
+      - capture Peter Pan
+      - maintain authority over his crew
+  tinker_bell:
+    traits: [fiercely loyal, emotional, resourceful]
+    goals:
+      - help Peter
+      - prove her importance
+  charlie:
+    traits: [sharp-minded, quietly stubborn, endlessly curious, wry, steady]
+    goals:
+      - uncover the hidden rules behind the world
+      - reshape broken systems into something elegant
+      - protect those in need
+story_tone:
+  - whimsical
+  - adventurous
+  - occasionally eerie

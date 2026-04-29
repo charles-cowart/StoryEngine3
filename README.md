@@ -81,15 +81,18 @@ summarized_through_message: 10
 unsummarized_message_indexes: [11, 12]
 ```
 
+## Story bible indexing (LlamaIndex)
 
-## Story bible indexing (llamaIndex)
+- On startup, StoryEngine3 indexes files in `data/` using LlamaIndex.
+- Retrieval runs before each assistant response, injecting relevant canon context into the prompt.
+- The selected `--model` is used for generation and for Ollama-backed LlamaIndex operations (LLM and embeddings).
 
-- On startup, StoryEngine3 indexes files in `data/` using llamaIndex.
-- Retrieval runs before each assistant response and injects relevant canon context into the prompt.
-- The selected `--model` is used for both generation and the Ollama-backed llamaIndex LLM/embeddings.
+Sample public domain corpora are provided:
 
-Sample Peter Pan corpus files are included in `data/` to provide and example story canon.
-  - Note that the corpus contains a new character `Charlie` and a new location `Solana` to demonstrate
-    that the LLM is using the RAG and not just relying on its own knowledge of the Peter Pan story.
-    
-A more detailed corpus based on Alice in Wonderland are included in `data/alice_rag` to provde a more detailed example story canon.
+- `example_data/peter_rag/`  
+  Includes a minimal Peter Pan–based corpus. It introduces a custom character (`Charlie`) and location (`Solana`) to demonstrate that responses are grounded in retrieved context rather than prior model knowledge.
+
+- `example_data/alice_rag/`  
+  A more detailed Alice in Wonderland–based corpus, illustrating a richer story bible structure for RAG-driven generation.
+
+To use these examples, create a `data/` directory in the project root and copy in the files you want, or provide your own corpus.
