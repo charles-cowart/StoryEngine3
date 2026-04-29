@@ -8,7 +8,7 @@
 ## Theme A: Identity under transformation
 
 ### Claim
-Alice’s frequent changes in size reflect her confusion about who she is and her difficulty remembering things as she grows up.
+Alice’s frequent and dramatic changes in size reflect her confusion about who she is, especially as she deals with memory lapses and tries to understand her own growth.
 
 ### Scene anchors
 - Early shrinking/growing episodes.
@@ -16,13 +16,13 @@ Alice’s frequent changes in size reflect her confusion about who she is and he
 - Final courtroom assertion of self-trust.
 
 ### Good RAG question patterns
-- “How does physical change symbolize mental change?”
-- “Is Alice more confident by the end?”
+- “How does physical change relate to Alice’s sense of self?”
+- “Does Alice become more confident by the end?”
 
 ## Theme B: Rule systems without reason
 
 ### Claim
-Wonderland institutions maintain formal structure while detaching from fairness and logic.
+Wonderland institutions keep formal structures but often ignore fairness and logic.
 
 ### Scene anchors
 - Caucus-race procedure.
@@ -37,7 +37,7 @@ Wonderland institutions maintain formal structure while detaching from fairness 
 ## Theme C: Language as unstable ground
 
 ### Claim
-Wordplay and shifting meanings show that language in Wonderland is often a source of conflict rather than clear communication.
+Wordplay and shifting meanings show that language in Wonderland often creates confusion or conflict instead of clear communication.
 
 ### Scene anchors
 - Puns in Mock Turtle schooling.
