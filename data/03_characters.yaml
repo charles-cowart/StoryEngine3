@@ -19,6 +19,12 @@ characters:
     goals:
       - help Peter
       - prove her importance
+  charlie:
+    traits: [sharp-minded, quietly stubborn, endlessly curious, wry, steady]
+    goals:
+      - uncover the hidden rules behind the world
+      - reshape broken systems into something elegant
+      - protect those in need
 story_tone:
   - whimsical
   - adventurous

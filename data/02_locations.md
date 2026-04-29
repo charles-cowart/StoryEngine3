@@ -11,3 +11,6 @@ A looming sea cave shaped like a skull, used for secret meetings and ambushes.
 
 ## Jolly Roger
 Captain Hook's pirate ship, armed with cannons and filled with stolen treasures.
+
+## Solana
+Charlie's airship, armed with magical cannons and depth charges (bombs).

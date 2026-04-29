@@ -13,7 +13,7 @@ from ollama import Client
 
 
 class Session:
-    WINDOW_SIZE = 30
+    WINDOW_SIZE = 20
 
     def __init__(self, model='gpt-oss:20b', output_path=None, resume_path=None, client=None):
         self.client = client or Client()

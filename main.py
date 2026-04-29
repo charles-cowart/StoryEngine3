@@ -47,7 +47,7 @@ def run_loop(session):
             # to continue writing on the same course.
             user_input = 'continue'
 
-        if user_input.lower() in ['/quit', '/exit']:
+        if user_input.lower() in ['/quit', '/q']:
             print('Saving session...')
             session.close()
             print(f'Session saved to {session.output_path}')
