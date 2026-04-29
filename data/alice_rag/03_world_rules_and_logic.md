@@ -5,16 +5,16 @@
 - doc_type: world_rules
 - chapter_scope: all
 
-## 1) Ontological instability
+## 1) Unstable rules of Wonderland
 
-Wonderland does not guarantee persistent relations between:
+Wonderland does not follow normal, consistent rules about:
 - size and power,
 - language and meaning,
 - rank and competence,
 - process and justice.
 
 ### RAG use
-When users ask “Why does X contradict Y?”, retrieve this section to frame contradiction as design principle, not continuity error.
+When users ask “Why does X contradict Y?”, retrieve this section to frame contradiction as a design principle, not a continuity error.
 
 ## 2) Size-change mechanics
 
@@ -26,20 +26,20 @@ When users ask “Why does X contradict Y?”, retrieve this section to frame co
 - Physical scale changes social treatment.
 - Identity narratives are repeatedly reset by bodily discontinuity.
 
-## 3) Language games as governance
+## 3) Language as a form of control
 
-In many scenes, authority is enacted through:
+In many scenes, authority is shown through:
 - pedantic correction,
-- literalization of idioms,
-- riddle structures without solutions,
-- punitive response to semantic ambiguity.
+- literal interpretation of phrases,
+- riddles without clear answers,
+- punitive response to unclear meaning.
 
 ### Retrieval-ready interpretation
-Language is not only communication; it is jurisdiction.
+In Wonderland, the way language is used often determines who has power.
 
 ## 4) Time disorder
 
-Tea-party logic introduces persistent present-time (“always tea-time”).
+Tea-party logic introduces a persistent present-time (“always tea-time”).
 
 ### Consequences
 - Ritual repeats without advancement.
@@ -59,9 +59,9 @@ Tea-party logic introduces persistent present-time (“always tea-time”).
 ### Educational parody
 - Mock Turtle’s schooling narrative mocks curriculum prestige.
 
-## 6) Emotional physics
+## 6) How emotions affect the world
 
-Emotion alters environment materially (e.g., tears produce navigable geography).
+Emotion can change the environment in a material way (e.g., tears produce a navigable pool).
 
 ### RAG interpretation cue
 When users ask how “feelings shape plot,” connect emotional states to literal world construction.
@@ -75,4 +75,4 @@ Wonderland can be read through dream conventions:
 - compressed authority archetypes.
 
 ### RAG caveat
-A strong answer should avoid reducing all meaning to “it was only a dream”; instead, treat dream structure as critical lens.
+A strong answer should avoid reducing all meaning to “it was only a dream”; instead, treat dream structure as one useful lens.
