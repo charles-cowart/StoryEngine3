@@ -88,4 +88,8 @@ unsummarized_message_indexes: [11, 12]
 - Retrieval runs before each assistant response and injects relevant canon context into the prompt.
 - The selected `--model` is used for both generation and the Ollama-backed llamaIndex LLM/embeddings.
 
-Sample Peter Pan corpus files are included in `data/` to provide initial story canon.
+Sample Peter Pan corpus files are included in `data/` to provide and example story canon.
+  - Note that the corpus contains a new character `Charlie` and a new location `Solana` to demonstrate
+    that the LLM is using the RAG and not just relying on its own knowledge of the Peter Pan story.
+    
+A more detailed corpus based on Alice in Wonderland are included in `data/alice_rag` to provde a more detailed example story canon.
