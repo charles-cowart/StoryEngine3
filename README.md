@@ -1,6 +1,6 @@
 # StoryEngine3
 
-Interactive story-writing CLI using local Ollama models, with append-only transcript logging and YAML session persistence.
+Interactive story-writing CLI using local Ollama models, llamaIndex retrieval over local story files, append-only transcript logging, and YAML session persistence.
 
 ## Install
 
@@ -77,3 +77,12 @@ rolling_summary: The story centers on...
 summarized_through_message: 10
 unsummarized_message_indexes: [11, 12]
 ```
+
+
+## Story bible indexing (llamaIndex)
+
+- On startup, StoryEngine3 indexes files in `data/` using llamaIndex.
+- Retrieval runs before each assistant response and injects relevant canon context into the prompt.
+- The selected `--model` is used for both generation and the Ollama-backed llamaIndex LLM/embeddings.
+
+Sample Peter Pan corpus files are included in `data/` to provide initial story canon.

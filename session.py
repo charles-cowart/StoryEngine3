@@ -6,6 +6,9 @@ from itertools import cycle
 from time import sleep
 
 import yaml
+from llama_index.core import Settings, SimpleDirectoryReader, VectorStoreIndex
+from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.llms.ollama import Ollama
 from ollama import Client
 
 
@@ -16,16 +19,17 @@ class Session:
         self.client = client or Client()
         self.model = model
         self.output_path = output_path
+        self.data_path = 'data'
+        self.story_bible_context = ''
         self.system_prompt = (
             'You are a creative writing assistant. Help the user write an interactive story. '
             'Maintain continuity, tone, characters, and plot details from prior context. '
             'Be imaginative but coherent, and when appropriate propose concise next-scene options.'
-            "Stay consistent with the supplied world, characters, and plot facts."
-            "Do not contradict established facts unless the user explicitly revises them."
-            "Preserve character voice and relationship dynamics."
-            "Prefer natural scene continuation over exposition dumps."
-            "When uncertain, follow the most specific fact in the story bible."
-            # Story Bibles would be added here.
+            'Stay consistent with the supplied world, characters, and plot facts.'
+            'Do not contradict established facts unless the user explicitly revises them.'
+            'Preserve character voice and relationship dynamics.'
+            'Prefer natural scene continuation over exposition dumps.'
+            'When uncertain, follow the most specific fact in the story bible.'
         )
 
         # for now, give it the model name
@@ -54,6 +58,37 @@ class Session:
                 os.makedirs('sessions', exist_ok=True)
                 self.output_path = os.path.join('sessions', f'{self.session_id}.yaml')
 
+        self._build_story_bible_index()
+
+    def _build_story_bible_index(self):
+        if not os.path.isdir(self.data_path):
+            return
+
+        try:
+            Settings.llm = Ollama(model=self.model, request_timeout=120.0)
+            Settings.embed_model = OllamaEmbedding(model_name=self.model)
+            documents = SimpleDirectoryReader(self.data_path).load_data()
+            if not documents:
+                return
+            self.story_bible_index = VectorStoreIndex.from_documents(documents)
+            self.story_bible_query_engine = self.story_bible_index.as_query_engine(similarity_top_k=3)
+        except Exception:
+            self.story_bible_index = None
+            self.story_bible_query_engine = None
+
+    def _story_bible_snippet(self, prompt):
+        if not getattr(self, 'story_bible_query_engine', None):
+            return ''
+
+        try:
+            response = self.story_bible_query_engine.query(
+                f'Find canon details that are most relevant to continue this story prompt: {prompt}'
+            )
+            text = str(response).strip()
+            return text
+        except Exception:
+            return ''
+
     def add_user_message(self, content):
         self._append_message('user', content)
 
@@ -78,7 +113,6 @@ class Session:
         unsummarized = self._unsummarized_messages()
         while len(unsummarized) > self.WINDOW_SIZE:
             block = unsummarized[: self.WINDOW_SIZE]
-            start_index = block[0]['index']
             end_index = block[-1]['index']
             next_summary = self._summarize_block(block)
             self.rolling_summary = next_summary
@@ -139,9 +173,21 @@ class Session:
                 {
                     'role': 'system',
                     'content': (
-                        'Rolling summary of earlier conversation context '\
+                        'Rolling summary of earlier conversation context '
                         f'(covers messages 1 through {self.summarized_through_message}):\n'
                         f'{self.rolling_summary}'
+                    ),
+                }
+            )
+
+        if self.story_bible_context:
+            payload.append(
+                {
+                    'role': 'system',
+                    'content': (
+                        'Story bible references retrieved from indexed files. '
+                        'Use these facts unless explicitly overridden by the user:\n'
+                        f'{self.story_bible_context}'
                     ),
                 }
             )
@@ -166,6 +212,13 @@ class Session:
         return lines
 
     def generate_assistant_response(self):
+        latest_user_message = ''
+        for message in reversed(self.messages):
+            if message['role'] == 'user':
+                latest_user_message = message['content']
+                break
+        self.story_bible_context = self._story_bible_snippet(latest_user_message)
+
         model_messages = self.build_model_messages()
         stream = self.client.chat(model=self.model, messages=model_messages, stream=True)
 
