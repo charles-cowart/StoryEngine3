@@ -29,7 +29,12 @@ class Session:
             'Do not contradict established facts unless the user explicitly revises them.'
             'Preserve character voice and relationship dynamics.'
             'Prefer natural scene continuation over exposition dumps.'
-            'When uncertain, follow the most specific fact in the story bible.'
+            'When uncertain, follow the most specific fact in the story bible. '
+            'The user may send lightweight screenplay markup in plain text. '
+            'A line beginning with "SCENE" sets or changes the scene context for subsequent action. '
+            'A line beginning with "DIALOG <speaker> <recipient or recipients|ALL>:" indicates dialogue '
+            'spoken by the named speaker to the named recipient(s) up to the end of that line. '
+            'Interpret these markers as authorial intent and use them to guide narration and character voice.'
         )
 
         # for now, give it the model name
