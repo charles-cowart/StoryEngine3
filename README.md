@@ -53,6 +53,8 @@ Quit with `/quit`, `/q`. The session is automatically saved on quit or Ctrl+C.
   - Future model calls send system prompt + rolling summary + remaining unsummarized messages.
   - The value can be changed at compile-time.
 - YAML persistence includes metadata and enough state to reconstruct context boundaries.
+- Every `client.chat(...)` invocation is captured in `llm_calls` with the exact payload sent to
+  the model, so you can inspect prompt construction quality over time.
 
 ## Example YAML shape
 
@@ -80,6 +82,16 @@ summaries:
 rolling_summary: The story centers on...
 summarized_through_message: 10
 unsummarized_message_indexes: [11, 12]
+llm_calls:
+  - index: 1
+    type: assistant_response
+    model: gpt-oss:20b
+    timestamp: '2026-04-27T03:00:12.000000+00:00'
+    messages:
+      - role: system
+        content: You are a creative writing assistant...
+      - role: user
+        content: Let's start with a haunted lighthouse.
 ```
 
 ## Story bible indexing (LlamaIndex)
