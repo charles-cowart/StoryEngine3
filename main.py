@@ -36,22 +36,37 @@ def run_loop(session):
 
     while True:
         try:
-            user_input = input('You: ').strip()
+            first_line = input('You: ')
         except (EOFError, KeyboardInterrupt):
             print('\nExiting and saving session...')
             session.close()
             return
 
-        if not user_input:
-            # For story writing, if the user presses return, consider that a command
-            # to continue writing on the same course.
-            user_input = 'continue'
-
-        if user_input.lower() in ['/quit', '/q']:
+        if first_line.strip().lower() in ['/quit', '/q']:
             print('Saving session...')
             session.close()
             print(f'Session saved to {session.output_path}')
             return
+
+        input_lines = [first_line]
+        while True:
+            try:
+                next_line = input('... ')
+            except (EOFError, KeyboardInterrupt):
+                print('\nExiting and saving session...')
+                session.close()
+                return
+
+            if next_line == '':
+                break
+            input_lines.append(next_line)
+
+        user_input = '\n'.join(input_lines).strip()
+
+        if not user_input:
+            # For story writing, if the user submits an empty message (double return),
+            # consider that a command to continue writing on the same course.
+            user_input = 'continue'
 
         session.add_user_message(user_input)
 
