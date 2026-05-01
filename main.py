@@ -16,6 +16,25 @@ def parse_args():
     return parser.parse_args()
 
 
+def _expand_markup_shortcut(line):
+    stripped = line.lstrip()
+    indent = line[: len(line) - len(stripped)]
+
+    if stripped.startswith('/s'):
+        remainder = stripped[2:]
+        if remainder.startswith(' '):
+            remainder = remainder[1:]
+        return f'{indent}SCENE {remainder}'.rstrip()
+
+    if stripped.startswith('/d'):
+        remainder = stripped[2:]
+        if remainder.startswith(' '):
+            remainder = remainder[1:]
+        return f'{indent}DIALOG {remainder}'.rstrip()
+
+    return line
+
+
 def run_loop(session):
     if session.is_resumed is True:
         print('Story session resumed.')
@@ -24,7 +43,8 @@ def run_loop(session):
 
     print(f'Model: {session.model}')
     print(f'Session file: {session.output_path}')
-    print('Type your prompt, or enter /quit to save and exit.\n')
+    print('Type your prompt, or enter /quit to save and exit.')
+    print('Shortcuts: /s -> SCENE, /d -> DIALOG\n')
 
     if session.is_resumed is True:
         context_lines = session.resumed_context_lines()
@@ -48,7 +68,7 @@ def run_loop(session):
             print(f'Session saved to {session.output_path}')
             return
 
-        input_lines = [first_line]
+        input_lines = [_expand_markup_shortcut(first_line)]
         while True:
             try:
                 next_line = input('... ')
@@ -59,7 +79,7 @@ def run_loop(session):
 
             if next_line == '':
                 break
-            input_lines.append(next_line)
+            input_lines.append(_expand_markup_shortcut(next_line))
 
         user_input = '\n'.join(input_lines).strip()
 
