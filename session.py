@@ -1,4 +1,5 @@
 import os
+import copy
 import threading
 import uuid
 from datetime import datetime, timezone
@@ -56,6 +57,7 @@ class Session:
             self.ended_at = None
             self.status = 'active'
             self.messages = []
+            self.llm_calls = []
             self.summaries = []
             self.rolling_summary = ''
             self.summarized_through_message = 0
@@ -162,6 +164,7 @@ class Session:
                 'content': 'Conversation block to incorporate:\n' + '\n'.join(lines),
             }
         )
+        self._record_llm_call('rolling_summary', summary_messages)
 
         response = self.client.chat(
             model=self.model,
@@ -225,6 +228,7 @@ class Session:
         self.story_bible_context = self._story_bible_snippet(latest_user_message)
 
         model_messages = self.build_model_messages()
+        self._record_llm_call('assistant_response', model_messages)
         stream = self.client.chat(model=self.model, messages=model_messages, stream=True)
 
         chunks = []
@@ -277,6 +281,7 @@ class Session:
             'ended_at': self.ended_at,
             'status': self.status,
             'messages': self.messages,
+            'llm_calls': self.llm_calls,
             'summaries': self.summaries,
             'rolling_summary': self.rolling_summary,
             'summarized_through_message': self.summarized_through_message,
@@ -314,14 +319,28 @@ class Session:
         self.ended_at = data.get('ended_at')
         self.status = 'active'
         self.messages = data.get('messages', [])
+        self.llm_calls = data.get('llm_calls', [])
         self.summaries = data.get('summaries', [])
         self.rolling_summary = data.get('rolling_summary', '')
         self.summarized_through_message = data.get('summarized_through_message', 0)
 
         if not isinstance(self.messages, list):
             raise ValueError('Malformed YAML: messages must be a list.')
+        if not isinstance(self.llm_calls, list):
+            raise ValueError('Malformed YAML: llm_calls must be a list.')
         if not isinstance(self.summaries, list):
             raise ValueError('Malformed YAML: summaries must be a list.')
+
+    def _record_llm_call(self, call_type, messages):
+        self.llm_calls.append(
+            {
+                'index': len(self.llm_calls) + 1,
+                'type': call_type,
+                'model': self.model,
+                'timestamp': self._now_iso(),
+                'messages': copy.deepcopy(messages),
+            }
+        )
 
     @staticmethod
     def _now_iso():
