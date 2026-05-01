@@ -1,5 +1,7 @@
 import argparse
 import sys
+import termios
+import tty
 
 from ollama import ResponseError
 
@@ -35,6 +37,53 @@ def _expand_markup_shortcut(line):
     return line
 
 
+def _read_line_with_shortcuts(prompt='> '):
+    """Read user input character-by-character and expand inline shortcuts."""
+    print(prompt, end='', flush=True)
+
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    buffer = []
+
+    try:
+        tty.setraw(fd)
+        while True:
+            ch = sys.stdin.read(1)
+            if ch in ('\n', '\r'):
+                print('')
+                break
+
+            if ch == '\x03':  # Ctrl+C
+                raise KeyboardInterrupt
+            if ch == '\x04':  # Ctrl+D
+                raise EOFError
+
+            if ch in ('\x7f', '\b'):  # Backspace
+                if buffer:
+                    buffer.pop()
+                    sys.stdout.write('\b \b')
+                    sys.stdout.flush()
+                continue
+
+            buffer.append(ch)
+            sys.stdout.write(ch)
+            sys.stdout.flush()
+
+            # Dynamically convert '/d' -> 'DIALOG ' as typed.
+            if ''.join(buffer).endswith('/d'):
+                sys.stdout.write('\b\bDIALOG ')
+                sys.stdout.flush()
+                buffer = buffer[:-2] + list('DIALOG ')
+            elif ''.join(buffer).endswith('/s'):
+                sys.stdout.write('\b\bSCENE ')
+                sys.stdout.flush()
+                buffer = buffer[:-2] + list('SCENE ')
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+    return ''.join(buffer)
+
+
 def run_loop(session):
     if session.is_resumed is True:
         print('Story session resumed.')
@@ -56,7 +105,7 @@ def run_loop(session):
 
     while True:
         try:
-            first_line = input('You: ')
+            first_line = _read_line_with_shortcuts('> ')
         except (EOFError, KeyboardInterrupt):
             print('\nExiting and saving session...')
             session.close()
@@ -71,7 +120,7 @@ def run_loop(session):
         input_lines = [_expand_markup_shortcut(first_line)]
         while True:
             try:
-                next_line = input('... ')
+                next_line = _read_line_with_shortcuts('... ')
             except (EOFError, KeyboardInterrupt):
                 print('\nExiting and saving session...')
                 session.close()

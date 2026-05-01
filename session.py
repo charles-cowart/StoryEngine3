@@ -228,7 +228,7 @@ class Session:
         stream = self.client.chat(model=self.model, messages=model_messages, stream=True)
 
         chunks = []
-        print(f'\n{self.assistant_name}: ', end='', flush=True)
+        print('\n', end='', flush=True)
 
         spinner_stop = threading.Event()
         spinner_started = threading.Event()
@@ -237,9 +237,9 @@ class Session:
         def _spinner():
             spinner_started.set()
             while not spinner_stop.is_set():
-                print(f'\r{self.assistant_name}: Thinking... {next(spinner_frames)}', end='', flush=True)
+                print(f'\rThinking... {next(spinner_frames)}', end='', flush=True)
                 sleep(0.1)
-            print(f'\r{self.assistant_name}: ', end='', flush=True)
+            print('\r', end='', flush=True)
 
         spinner_thread = threading.Thread(target=_spinner, daemon=True)
         spinner_thread.start()
